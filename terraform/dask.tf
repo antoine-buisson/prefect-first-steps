@@ -18,6 +18,12 @@ resource "kubernetes_role" "dask-full-access" {
   }
 
   rule {
+    api_groups = ["kubernetes.dask.org"]
+    resources  = ["daskclusters"]
+    verbs      = ["list", "get", "watch", "create", "update", "delete"]
+  }
+
+  rule {
     api_groups = [""]
     resources  = ["*"]
     verbs      = ["*"]

@@ -43,6 +43,7 @@ deployments:
       image: '{{ build_image.image }}'
       image_pull_policy: Never
       service_account_name: prefect-worker-sa
+      finished_job_ttl: 120
   concurrency_limit:
   enforce_parameter_schema: true
   schedules: []
