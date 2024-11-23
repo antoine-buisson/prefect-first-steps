@@ -1,0 +1,29 @@
+# generic metadata
+prefect-version: 3.1.4
+name: test
+
+# preparation steps
+build: null
+push: null
+
+# runtime steps
+pull: null
+
+# deployment configurations
+deployments:
+- # base metadata
+  name: main
+  version: null
+  tags: []
+  description: null
+  schedule: null
+
+  # flow-specific fields
+  entrypoint: null
+  parameters: {}
+
+  # infra-specific fields
+  work_pool:
+    name: null
+    work_queue_name: null
+    job_variables: {}

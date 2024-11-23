@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "prefect-first-steps"
+version = "0.1.0"
+description = ""
+authors = ["Antoine Buisson <antoine.buisson@sia-partners.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+prefect = "^3.1.4"
+pyspark = "^3.5.3"
+prefect-dask = "^0.3.2"
+dask-kubernetes = "^2024.9.0"
+dask = "2024.9.1"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
