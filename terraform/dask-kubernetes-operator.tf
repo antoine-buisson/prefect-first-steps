@@ -4,12 +4,6 @@ resource "kubernetes_namespace" "dask-kubernetes-operator" {
   }
 }
 
-resource "kubernetes_namespace" "dask" {
-  metadata {
-    name = "dask"
-  }
-}
-
 resource "helm_release" "dask-kubernetes-operator" {
   name = "dask-kubernetes-operator"
 

@@ -1,7 +1,5 @@
 from prefect import task, flow 
-from prefect_dask.task_runners import DaskTaskRunner 
-
-from dask_kubernetes.operator import KubeCluster
+from prefect_dask.task_runners import DaskTaskRunner
 
 #print square of a number
 @task 
