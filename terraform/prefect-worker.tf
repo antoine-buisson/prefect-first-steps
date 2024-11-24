@@ -17,7 +17,10 @@ resource "helm_release" "prefect-worker" {
     "${file("files/prefect-worker/values.yaml")}"
   ]
 
-  depends_on = [kubernetes_config_map.base-job-template]
+  depends_on = [
+    kubernetes_config_map.base-job-template,
+    helm_release.prefect-server,
+  ]
 }
 
 resource "kubernetes_config_map" "base-job-template" {
