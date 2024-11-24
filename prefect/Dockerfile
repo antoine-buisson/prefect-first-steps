@@ -24,3 +24,5 @@ COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 WORKDIR /opt/prefect
 
 COPY flows flows
+
+COPY daskcluster.yaml daskcluster.yaml

@@ -14,6 +14,18 @@ build:
     image_name: prefect-main
     tag: latest
     dockerfile: Dockerfile
+- prefect_docker.deployments.steps.build_docker_image:
+    id: build_image_dask
+    requires: prefect-docker>=0.3.1
+    image_name: dask-custom
+    tag: latest
+    dockerfile: DockerfileDask
+- prefect_docker.deployments.steps.build_docker_image:
+    id: build_image_spark
+    requires: prefect-docker>=0.3.1
+    image_name: spark-custom
+    tag: latest
+    dockerfile: DockerfileSpark
 
 # push section allows you to manage if and how this project is uploaded to remote locations
 push:
@@ -35,7 +47,10 @@ deployments:
   description:
   schedule: {}
   entrypoint: flows/main.py:my_flow
-  parameters: {"elements": [1, 2, 3, 4, 5]}
+  parameters: {
+    "nb_dataframes": 2,
+    "n_spark_executors": 1
+  }
   work_pool:
     name: default
     work_queue_name:

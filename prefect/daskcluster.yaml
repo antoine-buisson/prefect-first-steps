@@ -1,0 +1,73 @@
+apiVersion: kubernetes.dask.org/v1
+kind: DaskCluster
+metadata:
+  name: simple
+  namespace: dask
+spec:
+  worker:
+    replicas: 2
+    spec:
+      serviceAccountName: dask-worker-sa
+      containers:
+      - name: worker
+        image: "dask-custom:latest"
+        imagePullPolicy: "Never"
+        args:
+          - dask-worker
+          - --name
+          - $(DASK_WORKER_NAME)
+          - --dashboard
+          - --dashboard-address
+          - "8788"
+          - --nthreads
+          - "1"
+        env:
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+        ports:
+          - name: http-dashboard
+            containerPort: 8788
+            protocol: TCP
+  scheduler:
+    spec:
+      containers:
+      - name: scheduler
+        image: "dask-custom:latest"
+        imagePullPolicy: "Never"
+        args:
+          - dask-scheduler
+        ports:
+          - name: tcp-comm
+            containerPort: 8786
+            protocol: TCP
+          - name: http-dashboard
+            containerPort: 8787
+            protocol: TCP
+        readinessProbe:
+          httpGet:
+            port: http-dashboard
+            path: /health
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            port: http-dashboard
+            path: /health
+          initialDelaySeconds: 15
+          periodSeconds: 20
+    service:
+      type: NodePort
+      selector:
+        dask.org/cluster-name: simple
+        dask.org/component: scheduler
+      ports:
+      - name: tcp-comm
+        protocol: TCP
+        port: 8786
+        targetPort: "tcp-comm"
+      - name: http-dashboard
+        protocol: TCP
+        port: 8787
+        targetPort: "http-dashboard"

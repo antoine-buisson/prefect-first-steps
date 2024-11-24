@@ -1,3 +1,32 @@
+########################################### `spark-deps` download all required jars
+FROM alpine:latest AS spark-deps
+
+# Install curl (if not pre-installed)
+RUN apk add --no-cache curl bash
+
+# Copy the local script to the container
+COPY ./download_jars.sh ./download_jars.sh
+
+# Make the script executable
+RUN chmod +x ./download_jars.sh
+
+# Execute the script
+RUN ./download_jars.sh '/deps/jars'
+
+########################################### `driver` image used for runtime
 FROM ghcr.io/dask/dask:latest-py3.11
 
-RUN /opt/conda/bin/pip install prefect==3.1.4 prefect-dask==0.3.2 dask-kubernetes==2024.9.0
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt update -y && apt install -y openjdk-17-jdk
+
+RUN /opt/conda/bin/pip install pyspark==3.5.0
+
+ENV SPARK_HOME=/opt/conda/lib/python3.11/site-packages/pyspark
+
+COPY --from=spark-deps /deps/jars/* ${SPARK_HOME}/jars/
+
+RUN /opt/conda/bin/pip install prefect==3.1.4 
+RUN /opt/conda/bin/pip install prefect-dask==0.3.2 
+RUN /opt/conda/bin/pip install dask-kubernetes==2024.9.0 
+RUN /opt/conda/bin/pip install pandas==2.2.3

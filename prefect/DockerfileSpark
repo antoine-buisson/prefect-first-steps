@@ -1,0 +1,21 @@
+########################################### `spark-deps` download all required jars
+FROM alpine:latest AS spark-deps
+
+# Install curl (if not pre-installed)
+RUN apk add --no-cache curl bash
+
+# Copy the local script to the container
+COPY ./download_jars.sh ./download_jars.sh
+
+# Make the script executable
+RUN chmod +x ./download_jars.sh
+
+# Execute the script
+RUN ./download_jars.sh '/deps/jars'
+
+########################################### `executor` image used for runtime
+FROM bitnami/spark:3.5.0 AS executor
+
+COPY --from=spark-deps /deps/jars/* ${SPARK_HOME}/jars/
+
+USER root
