@@ -1,0 +1,10 @@
+ARG IMAGE_VARIANT=slim-buster
+ARG PYTHON_VERSION=3.11
+
+FROM python:${PYTHON_VERSION}-${IMAGE_VARIANT}
+
+RUN pip --no-cache-dir install prefect kubernetes
+
+WORKDIR /opt/prefect
+
+COPY main.py main.py

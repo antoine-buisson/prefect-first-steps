@@ -1,0 +1,56 @@
+# Welcome to your prefect.yaml file! You can use this file for storing and managing
+# configuration for deploying your flows. We recommend committing this file to source
+# control along with your flow code.
+
+# Generic metadata about this project
+name: spark-operator
+prefect-version: 3.1.4
+
+# build section allows you to manage and build docker images
+build:
+- prefect_docker.deployments.steps.build_docker_image:
+    id: build_image_prefect
+    requires: prefect-docker>=0.3.1
+    image_name: prefect-spark-operator
+    tag: latest
+    dockerfile: DockerFilePrefect
+- prefect_docker.deployments.steps.build_docker_image:
+    id: build_image_spark
+    requires: prefect-docker>=0.3.1
+    image_name: spark-operator-custom
+    tag: latest
+    dockerfile: DockerFileSpark
+
+# push section allows you to manage if and how this project is uploaded to remote locations
+push:
+
+# pull section allows you to provide instructions for cloning this project in remote locations
+pull:
+- prefect.deployments.steps.set_working_directory:
+    directory: /opt/prefect
+
+# the deployments section allows you to provide configuration for deploying flows
+deployments:
+- name: default
+  version:
+  tags: []
+  description:
+  schedule: {}
+  entrypoint: main.py:spark_operator_test
+  parameters: {
+    'spark_app_file_path': '/opt/spark/custom/example.py',
+    'n_executors': 2
+  }
+  work_pool:
+    name: default
+    work_queue_name:
+    job_variables:
+      image: '{{ build_image_prefect.image }}'
+      image_pull_policy: Never
+      service_account_name: prefect-spark-operator-sa
+      finished_job_ttl: 120
+      env:
+        SPARK_IMAGE: '{{ build_image_spark.image }}'
+  concurrency_limit:
+  enforce_parameter_schema: true
+  schedules: []
