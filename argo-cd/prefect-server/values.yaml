@@ -16,3 +16,9 @@ prefect-server:
     enabled: true
     host:
       hostname: prefect.localtest.me
+    annotations:
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/description: Python Orchestration tool
+      gethomepage.dev/group: Orchestration
+      gethomepage.dev/icon: prefect.png
+      gethomepage.dev/name: Prefect
