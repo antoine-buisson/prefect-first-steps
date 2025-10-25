@@ -7,6 +7,7 @@ metadata:
 data:
   kubernetes.yaml: |
     mode: cluster
+    ingress: true
   settings.yaml: ""
   #settings.yaml: |
   #  providers:
@@ -18,22 +19,23 @@ data:
     - Developer:
         - Github:
             - abbr: GH
-              href: https://github.com/
-  services.yaml: |
-    - My First Group:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
+              href: https://github.com/antoine-buisson/prefect-first-steps
+  services.yaml: ""
+  # services.yaml: |
+  #   - My First Group:
+  #       - My First Service:
+  #           href: http://localhost/
+  #           description: Homepage is awesome
 
-    - My Second Group:
-        - My Second Service:
-            href: http://localhost/
-            description: Homepage is the best
+  #   - My Second Group:
+  #       - My Second Service:
+  #           href: http://localhost/
+  #           description: Homepage is the best
 
-    - My Third Group:
-        - My Third Service:
-            href: http://localhost/
-            description: Homepage is 😎
+  #   - My Third Group:
+  #       - My Third Service:
+  #           href: http://localhost/
+  #           description: Homepage is 😎
   widgets.yaml: |
     - kubernetes:
         cluster:
