@@ -8,6 +8,10 @@ prefect-server:
     image:
       repository: bitnamilegacy/postgresql
 
+  server:
+    uiConfig:
+      prefectUiApiUrl: "http://prefect.localtest.me:4200/api"
+
   ingress:
     enabled: true
     host:
