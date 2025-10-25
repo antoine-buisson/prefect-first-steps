@@ -1,4 +1,5 @@
 apiVersion: v2
+name: local-prefect-worker
 
 dependencies:
   - repository: https://prefecthq.github.io/prefect-helm
