@@ -1,0 +1,6 @@
+apiVersion: v2
+
+dependencies:
+  - repository: https://prefecthq.github.io/prefect-helm
+    name: prefect-worker
+    version: 2024.11.21014951
