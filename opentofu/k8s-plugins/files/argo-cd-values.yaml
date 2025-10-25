@@ -31,6 +31,13 @@ server:
     # -- Enable an ingress resource for the Argo CD server
     enabled: true
 
+    annotations:
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/description: Continuous Deployment tool
+      gethomepage.dev/group: Cluster Management
+      gethomepage.dev/icon: https://argo-cd.readthedocs.io/en/stable/assets/logo.png
+      gethomepage.dev/name: Argo CD
+
 ## Argo Configs
 configs:
   # General Argo CD configuration. Any values you put under `.configs.cm` are passed to argocd-cm ConfigMap.

@@ -20,5 +20,5 @@ prefect-server:
       gethomepage.dev/enabled: "true"
       gethomepage.dev/description: Python Orchestration tool
       gethomepage.dev/group: Orchestration
-      gethomepage.dev/icon: prefect.png
+      gethomepage.dev/icon: https://images.seeklogo.com/logo-png/43/2/prefect-logo-png_seeklogo-438351.png
       gethomepage.dev/name: Prefect

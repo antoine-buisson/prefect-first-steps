@@ -187,3 +187,9 @@ ingress:
   enabled: true
   hosts:
   - marquez.localtest.me
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Open Lineage UI
+    gethomepage.dev/group: Data Governance
+    gethomepage.dev/icon: https://avatars.githubusercontent.com/u/40306238?v=4
+    gethomepage.dev/name: Marquez
