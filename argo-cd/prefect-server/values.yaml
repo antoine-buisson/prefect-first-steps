@@ -10,7 +10,7 @@ prefect-server:
 
   server:
     uiConfig:
-      prefectUiApiUrl: "http://prefect.localtest.me:4200/api"
+      prefectUiApiUrl: "http://prefect.localtest.me/api"
 
   ingress:
     enabled: true
