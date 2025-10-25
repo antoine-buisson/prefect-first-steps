@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: base-job-template
 data:
-  base-job-template.json: |
+  baseJobTemplate.json: |
     {
       "variables": {
         "type": "object",
