@@ -1,12 +1,13 @@
-worker:
-  apiConfig: server
+prefect-worker:
+  worker:
+    apiConfig: server
 
-  serverApiConfig: 
-    uiUrl: "http://prefect-server.prefect-server:4200"
-    apiUrl: "http://prefect-server.prefect-server:4200/api"
+    serverApiConfig: 
+      uiUrl: "http://prefect-server.prefect-server:4200"
+      apiUrl: "http://prefect-server.prefect-server:4200/api"
 
-  config:
-    workPool: "default"
+    config:
+      workPool: "default"
 
-    baseJobTemplate:
-      existingConfigMapName: "base-job-template"
+      baseJobTemplate:
+        existingConfigMapName: "base-job-template"

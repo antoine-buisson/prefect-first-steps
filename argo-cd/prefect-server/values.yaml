@@ -2,7 +2,8 @@ global:
   security:
     allowInsecureImages: true
 
-postgresql:
-  enabled: true
-  image:
-    repository: bitnamilegacy/postgresql
+prefect-server:
+  postgresql:
+    enabled: true
+    image:
+      repository: bitnamilegacy/postgresql
