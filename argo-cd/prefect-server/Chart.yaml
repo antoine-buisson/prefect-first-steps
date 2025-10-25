@@ -1,5 +1,6 @@
 apiVersion: v2
 name: local-prefect-server
+version: 0.1.0
 
 dependencies:
   - repository: https://prefecthq.github.io/prefect-helm
