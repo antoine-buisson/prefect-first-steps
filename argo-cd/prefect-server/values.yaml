@@ -7,3 +7,8 @@ prefect-server:
     enabled: true
     image:
       repository: bitnamilegacy/postgresql
+
+  ingress:
+    enabled: true
+    host:
+      hostname: prefect.localtest.me
