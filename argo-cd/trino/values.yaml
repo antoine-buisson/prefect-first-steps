@@ -60,16 +60,14 @@ trino:
       s3.endpoint=http://garage.garage:3900
       s3.region=garage
       s3.path-style-access=true
-      s3.aws-access-key=${ENV:access_key_id}
-      s3.aws-secret-key=${ENV:secret_access_key}
-
+      
   env:
-  - name: access_key_id
+  - name: AWS_ACCESS_KEY_ID
     valueFrom:
       secretKeyRef:
         name: s3-polaris-credentials
         key: access_key_id
-  - name: secret_access_key
+  - name: AWS_SECRET_ACCESS_KEY
     valueFrom:
       secretKeyRef:
         name: s3-polaris-credentials
