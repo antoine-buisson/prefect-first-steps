@@ -19,6 +19,7 @@ catalogs:
         iceberg.rest-catalog.oauth2.credential=root:s3cr3t
         iceberg.rest-catalog.oauth2.scope=PRINCIPAL_ROLE:ALL
         iceberg.rest-catalog.oauth2.token-refresh-enabled=true
+        iceberg.rest-catalog.nested-namespace-enabled=true
 ```
 - Connect to trino
 ```sh
@@ -28,8 +29,8 @@ kubectl exec --stdin --tty -n trino trino-coordinator-//////////-////// -- trino
 
 ## Create data in Iceberg
 ```sql
-CREATE SCHEMA IF NOT EXISTS 'polaris-default'.'cookbook';
-CREATE SCHEMA IF NOT EXISTS 'polaris-default'.'cookbook.public';
+CREATE SCHEMA IF NOT EXISTS "polaris-default".cookbook;
+CREATE SCHEMA IF NOT EXISTS "polaris-default".cookbook.public;
 CREATE TABLE IF NOT EXISTS 'polaris-default'.'cookbook.public'.people (id int, name string);
 INSERT INTO "polaris-default"."cookbook.public".people (id, name) VALUES (1, 'Alice'), (2, 'Bob');
 SELECT name FROM "polaris-default"."cookbook.public".people;
