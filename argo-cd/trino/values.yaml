@@ -5,7 +5,7 @@ trino:
       # -- Trino supports multiple [authentication
       # types](https://trino.io/docs/current/security/authentication-types.html):
       # PASSWORD, CERTIFICATE, OAUTH2, JWT, KERBEROS.
-      authenticationType: "PASSWORD"
+      authenticationType: ""
       query:
         maxMemory: "4GB"
 
