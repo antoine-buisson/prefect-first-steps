@@ -117,3 +117,13 @@ trino:
     #    hosts:
     #      - chart-example.local
     # ```
+
+  coordinator:
+    resources:
+      limits:
+        memory: 1024Mi
+
+  worker:
+    resources:
+      limits:
+        memory: 1024Mi
