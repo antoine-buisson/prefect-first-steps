@@ -47,8 +47,8 @@ trino:
       iceberg.rest-catalog.uri=http://polaris.localtest.me/api/catalog
       iceberg.rest-catalog.security=OAUTH2
       iceberg.rest-catalog.oauth2.server-uri=http://polaris.localtest.me/api/catalog/v1/oauth/tokens
-      iceberg.rest-catalog.oauth2.credential='root:s3cr3t'
-      iceberg.rest-catalog.oauth2.scope='PRINCIPAL_ROLE:ALL'
+      iceberg.rest-catalog.oauth2.credential=root:s3cr3t
+      iceberg.rest-catalog.oauth2.scope=PRINCIPAL_ROLE:ALL
       iceberg.rest-catalog.oauth2.token-refresh-enabled=true
 
   env: []
