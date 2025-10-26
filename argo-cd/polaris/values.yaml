@@ -573,7 +573,7 @@ storage:
   # -- The secret to pull storage credentials from.
   secret:
     # -- The name of the secret to pull storage credentials from.
-    name: garage-polaris-credentials
+    name: s3-polaris-credentials
     # -- The key in the secret to pull the AWS access key ID from. Only required when using AWS.
     awsAccessKeyId: access_key_id
     # -- The key in the secret to pull the AWS secret access key from. Only required when using AWS.
