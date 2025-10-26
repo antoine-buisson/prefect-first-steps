@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nimtable-config
+
+data:
+  config.yaml: |
+    server:
+      port: {{ .Values.nimtable.config.server.port }}
+      host: {{ .Values.nimtable.config.server.host | quote }}
+    database:
+      url: {{ .Values.nimtable.config.database.url | quote }}
+      username: {{ .Values.nimtable.config.database.username | quote }}
+      password: {{ .Values.nimtable.config.database.password | quote }}

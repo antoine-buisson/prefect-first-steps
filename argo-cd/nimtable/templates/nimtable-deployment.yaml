@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nimtable
+spec:
+  replicas: {{ .Values.nimtable.replicaCount }}
+  selector:
+    matchLabels:
+      app: nimtable
+  template:
+    metadata:
+      labels:
+        app: nimtable
+    spec:
+      containers:
+        - name: nimtable
+          image: {{ .Values.nimtable.image }}
+          imagePullPolicy: {{ .Values.nimtable.imagePullPolicy }}
+          ports:
+            - containerPort: 8182
+          env:
+            - name: JAVA_OPTS
+              value: {{ .Values.nimtable.env.JAVA_OPTS | quote }}
+          volumeMounts:
+            - name: config
+              mountPath: /nimtable/config.yaml
+              subPath: config.yaml
+      volumes:
+        - name: config
+          configMap:
+            name: nimtable-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nimtable
+spec:
+  type: {{ .Values.nimtable.service.type }}
+  ports:
+    - port: {{ .Values.nimtable.service.port }}
+      targetPort: 8182
+  selector:
+    app: nimtable

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+spec:
+  replicas: {{ .Values.database.replicaCount }}
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+        - name: database
+          image: {{ .Values.database.image }}
+          imagePullPolicy: {{ .Values.database.imagePullPolicy }}
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: {{ .Values.database.env.POSTGRES_USER | quote }}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.database.env.POSTGRES_PASSWORD | quote }}
+            - name: POSTGRES_DB
+              value: {{ .Values.database.env.POSTGRES_DB | quote }}
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.databasePersistence.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database
+spec:
+  type: {{ .Values.database.service.type }}
+  ports:
+    - port: {{ .Values.database.service.port }}
+      targetPort: 5432
+  selector:
+    app: database
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.databasePersistence.name }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.database.persistence.size }}
+  storageClassName: {{ .Values.database.persistence.storageClass | quote }}

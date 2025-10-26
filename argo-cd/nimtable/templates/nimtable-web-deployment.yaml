@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nimtable-web
+spec:
+  replicas: {{ .Values.nimtableWeb.replicaCount }}
+  selector:
+    matchLabels:
+      app: nimtable-web
+  template:
+    metadata:
+      labels:
+        app: nimtable-web
+    spec:
+      containers:
+        - name: nimtable-web
+          image: {{ .Values.nimtableWeb.image }}
+          imagePullPolicy: {{ .Values.nimtableWeb.imagePullPolicy }}
+          ports:
+            - containerPort: 3000
+          env:
+            - name: JAVA_API_URL
+              value: {{ .Values.nimtableWeb.env.JAVA_API_URL | quote }}
+            - name: DATABASE_URL
+              value: {{ .Values.nimtableWeb.env.DATABASE_URL | quote }}
+            - name: JWT_SECRET
+              value: {{ .Values.nimtableWeb.env.JWT_SECRET | quote }}
+            - name: ADMIN_USERNAME
+              value: {{ .Values.nimtableWeb.env.ADMIN_USERNAME | quote }}
+            - name: ADMIN_PASSWORD
+              value: {{ .Values.nimtableWeb.env.ADMIN_PASSWORD | quote }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nimtable-web
+spec:
+  type: {{ .Values.nimtableWeb.service.type }}
+  ports:
+    - port: {{ .Values.nimtableWeb.service.port }}
+      targetPort: 3000
+  selector:
+    app: nimtable-web

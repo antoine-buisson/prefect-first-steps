@@ -1,0 +1,65 @@
+# Ingress for nimtable-web
+ingress:
+  enabled: true
+  host:
+    hostname: nimtable.localtest.me
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: A lightweight, easy-to-use platform to monitor, optimize, and govern your Iceberg-based lakehouse.
+    gethomepage.dev/group: Data Governance
+    gethomepage.dev/icon: https://avatars.githubusercontent.com/u/198492911?s=48&v=4
+    gethomepage.dev/name: Nimtable
+# nimtable-web (frontend)
+nimtableWeb:
+  image: ghcr.io/nimtable/nimtable-web:nightly
+  imagePullPolicy: IfNotPresent
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 3000
+  env:
+    JAVA_API_URL: http://nimtable:8182
+    DATABASE_URL: postgresql://nimtable_user:nimtable_user_password@database:5432/nimtable
+    JWT_SECRET: jwt_secret
+    ADMIN_USERNAME: admin
+    ADMIN_PASSWORD: admin
+
+# nimtable backend
+nimtable:
+  image: ghcr.io/nimtable/nimtable:nightly
+  imagePullPolicy: IfNotPresent
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 8182
+  env:
+    JAVA_OPTS: -Xmx32g -Xms512m
+  config:
+    server:
+      port: 8182
+      host: 0.0.0.0
+    database:
+      url: jdbc:postgresql://database:5432/nimtable
+      username: nimtable_user
+      password: password
+
+# Postgres database
+database:
+  image: postgres:17
+  imagePullPolicy: IfNotPresent
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 5432
+  env:
+    POSTGRES_USER: nimtable_user
+    POSTGRES_PASSWORD: nimtable_user_password
+    POSTGRES_DB: nimtable
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: ""
+
+# PVC name for Postgres
+databasePersistence:
+  name: nimtable-data-postgres
