@@ -4,9 +4,9 @@
 
 - Garage:
     ```sh
-    kubectl exec --stdin --tty -n garage garage-0 -- ./garage key create polaris
-    kubectl exec --stdin --tty -n garage garage-0 -- ./garage bucket create polaris
-    kubectl exec --stdin --tty -n garage garage-0 -- ./garage bucket allow --read --write --owner polaris --key polaris
+    kubectl exec --stdin --tty -n garage garage-0 -- ./garage key create polaris-default
+    kubectl exec --stdin --tty -n garage garage-0 -- ./garage bucket create polaris-default
+    kubectl exec --stdin --tty -n garage garage-0 -- ./garage bucket allow --read --write --owner polaris-default --key polaris-default
     ```
 
 ```sh
@@ -31,11 +31,11 @@ curl -s -v \
   http://polaris.localtest.me/api/management/v1/catalogs \
   -d '{
     "catalog": {
-      "name": "default",
+      "name": "polaris-default",
       "type": "INTERNAL",
       "readOnly": false,
       "properties": {
-        "default-base-location": "s3://polaris"
+        "default-base-location": "s3://polaris-default"
       },
       "storageConfigInfo": {
         "storageType": "S3",
