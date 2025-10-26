@@ -1,6 +1,6 @@
 trino:
   server:
-    workers: 2
+    workers: 1
     config:
       # -- Trino supports multiple [authentication
       # types](https://trino.io/docs/current/security/authentication-types.html):
