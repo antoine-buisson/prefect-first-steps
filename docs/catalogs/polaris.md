@@ -23,7 +23,7 @@ export TOKEN=$(
     http://polaris.localtest.me/api/catalog/v1/oauth/tokens | jq -r .access_token
 )
 
-curl -s -v \
+curl -s \
   -H "Authorization: Bearer ${TOKEN}" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
@@ -39,9 +39,10 @@ curl -s -v \
       },
       "storageConfigInfo": {
         "storageType": "S3",
-        "endpoint": "http://s3.garage.localtest.me",
-        "endpointInternal": "http://s3.garage.localtest.me",
-        "pathStyleAccess": true
+        "endpoint": "http://garage.garage:3900",
+        "region": "garage",
+        "pathStyleAccess": true,
+        "stsUnavailable": true
       }
     }
   }'

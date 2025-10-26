@@ -29,9 +29,9 @@ kubectl exec --stdin --tty -n trino trino-coordinator-//////////-////// -- trino
 
 ## Create data in Iceberg
 ```sql
-CREATE SCHEMA IF NOT EXISTS "polaris-default".cookbook;
-CREATE SCHEMA IF NOT EXISTS "polaris-default".cookbook.public;
-CREATE TABLE IF NOT EXISTS 'polaris-default'.'cookbook.public'.people (id int, name string);
+CREATE SCHEMA IF NOT EXISTS "polaris-default"."cookbook";
+CREATE SCHEMA IF NOT EXISTS "polaris-default"."cookbook.public";
+CREATE TABLE IF NOT EXISTS "polaris-default"."cookbook.public".people (id INTEGER, name VARCHAR);
 INSERT INTO "polaris-default"."cookbook.public".people (id, name) VALUES (1, 'Alice'), (2, 'Bob');
 SELECT name FROM "polaris-default"."cookbook.public".people;
 ```

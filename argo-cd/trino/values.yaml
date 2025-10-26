@@ -55,15 +55,25 @@ trino:
       iceberg.rest-catalog.oauth2.scope=PRINCIPAL_ROLE:ALL
       iceberg.rest-catalog.oauth2.token-refresh-enabled=true
       iceberg.rest-catalog.nested-namespace-enabled=true
+      # S3 / Garage settings
+      fs.native-s3.enabled=true
+      s3.endpoint=http://garage.garage:3900
+      s3.region=garage
+      s3.path-style-access=true
+      s3.aws-access-key=${ENV:access_key_id}
+      s3.aws-secret-key=${ENV:secret_access_key}
 
-  env: []
-  # env -- additional environment variables added to every pod, specified as a list with explicit values
-  # @raw
-  # Example:
-  # ```yaml
-  #  - name: NAME
-  #    value: "value"
-  # ```
+  env:
+  - name: access_key_id
+    valueFrom:
+      secretKeyRef:
+        name: s3-polaris-credentials
+        key: access_key_id
+  - name: secret_access_key
+    valueFrom:
+      secretKeyRef:
+        name: s3-polaris-credentials
+        key: secret_access_key
 
   envFrom: []
   # envFrom -- additional environment variables added to every pod, specified as a list of either `ConfigMap`
