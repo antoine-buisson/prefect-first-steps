@@ -58,7 +58,7 @@ database:
   persistence:
     enabled: true
     size: 1Gi
-    storageClass: ""
+    storageClass: standard
 
 # PVC name for Postgres
 databasePersistence:
