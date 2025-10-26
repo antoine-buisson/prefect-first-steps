@@ -7,7 +7,10 @@ trino:
       # PASSWORD, CERTIFICATE, OAUTH2, JWT, KERBEROS.
       authenticationType: ""
       query:
-        maxMemory: "4GB"
+        maxMemory: "1GB"
+    log:
+      trino:
+        level: DEBUG
 
     workerExtraConfig: ""
     coordinatorExtraConfig: ""
@@ -117,13 +120,3 @@ trino:
     #    hosts:
     #      - chart-example.local
     # ```
-
-  coordinator:
-    resources:
-      limits:
-        memory: 1024Mi
-
-  worker:
-    resources:
-      limits:
-        memory: 1024Mi
