@@ -370,7 +370,8 @@ advancedConfig:
 # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#envvar-v1-core
 # This can be useful to get configuration values from Kubernetes secrets or config maps.
 extraEnv:
-  []
+ - name: POLARIS_BOOTSTRAP_CREDENTIALS
+   value: POLARIS,root,s3cr3t
 #  - name: AWS_STORAGE_BUCKET
 #    value: s3://xxxxx/
 #  - name: AWS_ACCESS_KEY_ID
