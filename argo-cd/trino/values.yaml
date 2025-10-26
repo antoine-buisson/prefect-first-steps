@@ -44,7 +44,7 @@ trino:
     tpcds: |
       connector.name=tpcds
       tpcds.splits-per-node=4
-    polaris: |
+    polaris-default: |
       connector.name=iceberg
       iceberg.catalog.type=rest
       iceberg.rest-catalog.uri=http://polaris.polaris:8181/api/catalog
