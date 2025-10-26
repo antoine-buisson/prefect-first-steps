@@ -1,0 +1,113 @@
+server:
+  workers: 2
+  config:
+    # -- Trino supports multiple [authentication
+    # types](https://trino.io/docs/current/security/authentication-types.html):
+    # PASSWORD, CERTIFICATE, OAUTH2, JWT, KERBEROS.
+    authenticationType: "PASSWORD"
+    query:
+      maxMemory: "4GB"
+
+  workerExtraConfig: ""
+  coordinatorExtraConfig: ""
+
+accessControl:
+  type: configmap
+  refreshPeriod: 60s
+  # Rules file is mounted to /etc/trino/access-control
+  configFile: "rules.json"
+  rules:
+    rules.json: |-
+      {
+
+      }
+
+
+additionalConfigProperties: []
+# additionalConfigProperties -- [Additional config
+# properties](https://trino.io/docs/current/admin/properties.html).
+# @raw
+# Example:
+# ```yaml
+#  - internal-communication.shared-secret=random-value-999
+#  - http-server.process-forwarded=true
+# ```
+
+catalogs:
+  tpch: |
+    connector.name=tpch
+    tpch.splits-per-node=4
+  tpcds: |
+    connector.name=tpcds
+    tpcds.splits-per-node=4
+  polaris: |
+    connector.name=iceberg
+    iceberg.catalog.type=rest
+    iceberg.rest-catalog.uri=http://polaris.localtest.me/api/catalog
+
+env: []
+# env -- additional environment variables added to every pod, specified as a list with explicit values
+# @raw
+# Example:
+# ```yaml
+#  - name: NAME
+#    value: "value"
+# ```
+
+envFrom: []
+# envFrom -- additional environment variables added to every pod, specified as a list of either `ConfigMap`
+# or `Secret` references
+# @raw
+# Example:
+# ```yaml
+#   - secretRef:
+#     name: extra-secret
+# ```
+
+
+auth: {}
+# auth -- Available authentication methods.
+# @raw
+# Use username and password provided as a [password file](https://trino.io/docs/current/security/password-file.html#file-format):
+# ```yaml
+#  passwordAuth: "username:encrypted-password-with-htpasswd"
+# ```
+# Set the name of a secret containing this file in the password.db key
+# ```yaml
+#  passwordAuthSecret: "trino-password-authentication"
+# ```
+# Additionally, set [users' groups](https://trino.io/docs/current/security/group-file.html#file-format):
+# ```yaml
+#  refreshPeriod: 5s
+#  groups: "group_name:user_1,user_2,user_3"
+# ```
+# Set the name of a secret containing this file in the group.db key
+# ```yaml
+#  groupsAuthSecret: "trino-groups-authentication"
+# ```
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Multi Source Distributed SQL Query Engine
+    gethomepage.dev/group: Engine
+    gethomepage.dev/icon: https://trino.io/assets/trino.png
+    gethomepage.dev/name: Trino
+  hosts:
+  - host: trino.localtest.me
+    paths:
+      - path: /
+        pathType: ImplementationSpecific
+  tls: []
+  # ingress.tls -- Ingress
+  # [TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls)
+  # configuration.
+  # @raw
+  # Example:
+  # ```yaml
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+  # ```
