@@ -15,7 +15,7 @@ garage:
 
   # -- Default to 3 replicas, see the replication_mode section at
   # https://garagehq.deuxfleurs.fr/documentation/reference-manual/configuration/#replication-mode
-  replicationMode: "1"
+  replicationMode: "2"
 
   # -- zstd compression level of stored blocks
   # https://garagehq.deuxfleurs.fr/documentation/reference-manual/configuration/#compression-level
@@ -70,7 +70,7 @@ deployment:
   # -- Switchable to DaemonSet
   kind: StatefulSet
   # -- Number of StatefulSet replicas/garage nodes to start
-  replicaCount: 1
+  replicaCount: 2
   # -- If using statefulset, allow Parallel or OrderedReady (default)
   podManagementPolicy: OrderedReady
 
