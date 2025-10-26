@@ -41,7 +41,7 @@ nimtable:
     database:
       url: jdbc:postgresql://database:5432/nimtable
       username: nimtable_user
-      password: password
+      password: nimtable_user_password
 
 # Postgres database
 database:
