@@ -1,0 +1,32 @@
+global:
+  security:
+    allowInsecureImages: true
+
+minio:
+  image:
+    repository: bitnamilegacy/minio
+
+  clientImage:
+    repository: bitnamilegacy/minio-client
+
+  ## MinIO&reg; authentication parameters
+  ##
+  auth:
+    ## @param auth.rootUser MinIO&reg; root username
+    ##
+    rootUser: admin
+    ## @param auth.rootPassword Password for MinIO&reg; root user
+    ##
+    rootPassword: admin
+
+  defaultBuckets: "default"
+
+  ingress:
+    enabled: true
+    hostname: s3.minio.localtest.me
+    annotations:
+      gethomepage.dev/enabled: "true"
+      gethomepage.dev/description: S3-compatible object store
+      gethomepage.dev/group: Object Storage
+      gethomepage.dev/icon: https://images.seeklogo.com/logo-png/34/1/minio-logo-png_seeklogo-340054.png
+      gethomepage.dev/name: Minio
