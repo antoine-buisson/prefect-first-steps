@@ -9,10 +9,6 @@ minio:
   clientImage:
     repository: bitnamilegacy/minio-client
 
-  console:
-    image:
-      repository: bitnamilegacy/minio-object-browser
-
   ## MinIO&reg; authentication parameters
   ##
   auth:
@@ -28,9 +24,16 @@ minio:
   ingress:
     enabled: true
     hostname: s3.minio.localtest.me
-    annotations:
-      gethomepage.dev/enabled: "true"
-      gethomepage.dev/description: S3-compatible object store
-      gethomepage.dev/group: Object Storage
-      gethomepage.dev/icon: https://images.seeklogo.com/logo-png/34/1/minio-logo-png_seeklogo-340054.png
-      gethomepage.dev/name: Minio
+
+  console:
+    image:
+      repository: bitnamilegacy/minio-object-browser
+    ingress:
+      enabled: true
+      hostname: web.minio.localtest.me
+      annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/description: S3-compatible object store
+        gethomepage.dev/group: Object Storage
+        gethomepage.dev/icon: https://images.seeklogo.com/logo-png/34/1/minio-logo-png_seeklogo-340054.png
+        gethomepage.dev/name: Minio
