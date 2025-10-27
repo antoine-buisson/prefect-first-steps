@@ -17,7 +17,7 @@ minio:
     rootUser: admin
     ## @param auth.rootPassword Password for MinIO&reg; root user
     ##
-    rootPassword: admin
+    rootPassword: 12345678
 
   defaultBuckets: "default"
 
