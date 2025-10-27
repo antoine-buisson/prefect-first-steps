@@ -37,6 +37,7 @@ trino:
   #  - http-server.process-forwarded=true
   # ```
 
+  # https://trino.io/docs/current/object-storage/metastores.html#rest-catalog
   catalogs:
     tpch: |
       connector.name=tpch
@@ -55,25 +56,9 @@ trino:
       iceberg.rest-catalog.oauth2.scope=PRINCIPAL_ROLE:ALL
       iceberg.rest-catalog.oauth2.token-refresh-enabled=true
       iceberg.rest-catalog.nested-namespace-enabled=true
-      # S3 / Garage settings
-      fs.native-s3.enabled=true
-      s3.endpoint=http://garage.garage:3900
-      s3.region=garage
-      s3.path-style-access=true
-      s3.aws-access-key=${ENV:AWS_ACCESS_KEY_ID}
-      s3.aws-secret-key=${ENV:AWS_SECRET_ACCESS_KEY}
+      iceberg.rest-catalog.vended-credentials-enabled=true
 
-  env:
-  - name: AWS_ACCESS_KEY_ID
-    valueFrom:
-      secretKeyRef:
-        name: s3-polaris-credentials
-        key: access_key_id
-  - name: AWS_SECRET_ACCESS_KEY
-    valueFrom:
-      secretKeyRef:
-        name: s3-polaris-credentials
-        key: secret_access_key
+  env: []
 
   envFrom: []
   # envFrom -- additional environment variables added to every pod, specified as a list of either `ConfigMap`
