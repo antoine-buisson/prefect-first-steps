@@ -57,6 +57,7 @@ trino:
       iceberg.rest-catalog.oauth2.token-refresh-enabled=true
       iceberg.rest-catalog.nested-namespace-enabled=true
       iceberg.rest-catalog.vended-credentials-enabled=true
+      fs.native-s3.enabled=true
 
   env: []
 
