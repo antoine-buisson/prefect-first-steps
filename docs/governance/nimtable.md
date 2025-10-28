@@ -6,6 +6,23 @@
 
 ## Create a new catalog
 - From CLI Parameters
+<!-- ```sh
+spark-sql \
+--conf spark.sql.catalog.polaris-default=org.apache.polaris.spark.SparkCatalog \
+--conf spark.sql.catalog.polaris-default.type=rest \
+--conf spark.sql.catalog.polaris-default.uri=http://polaris.polaris:8181/api/catalog \
+--conf spark.sql.catalog.polaris-default.warehouse=polaris-default \
+--conf spark.sql.catalog.polaris-default.oauth2-server-uri=http://polaris.polaris:8181/api/catalog/v1/oauth/tokens\
+--conf spark.sql.catalog.polaris-default.credential=root:s3cr3t \
+--conf spark.sql.catalog.polaris-default.scope=PRINCIPAL_ROLE:ALL \
+--conf spark.sql.catalog.polaris-default.token-refresh-enabled=true \
+--conf spark.sql.catalog.polaris-default.header.X-Iceberg-Access-Delegation=vended-credentials \
+--conf spark.sql.catalog.polaris-default.nested-namespace-enabled=true \
+--conf spark.sql.catalog.polaris-default.io-impl=org.apache.iceberg.aws.s3.S3FileIO \
+--conf spark.sql.catalog.polaris-default.s3.endpoint=http://minio.minio:9000 \
+--conf spark.sql.catalog.polaris-default.s3.region=us-east-1 \
+--conf spark.sql.catalog.polaris-default.s3.path-style-access=true
+``` -->
 ```sh
 spark-sql \
 --conf spark.sql.catalog.polaris-default=org.apache.polaris.spark.SparkCatalog \
@@ -16,8 +33,12 @@ spark-sql \
 --conf spark.sql.catalog.polaris-default.credential=root:s3cr3t \
 --conf spark.sql.catalog.polaris-default.scope=PRINCIPAL_ROLE:ALL \
 --conf spark.sql.catalog.polaris-default.token-refresh-enabled=true \
---conf spark.sql.catalog.polaris-default.header.X-Iceberg-Access-Delegation=vended-credentials
-
+--conf spark.sql.catalog.polaris-default.io-impl=org.apache.iceberg.aws.s3.S3FileIO \
+--conf spark.sql.catalog.polaris-default.s3.endpoint=http://minio.minio:9000 \
+--conf spark.sql.catalog.polaris-default.s3.region=us-east-1 \
+--conf spark.sql.catalog.polaris-default.s3.path-style-access=true \
+--conf spark.sql.catalog.polaris-default.s3.access-key-id=minioadmin \
+--conf spark.sql.catalog.polaris-default.s3.secret-access-key=minioadmin
 ```
 
 - From REST + S3 template

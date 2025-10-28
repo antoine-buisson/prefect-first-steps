@@ -30,6 +30,9 @@ terragrunt apply
 ```
 
 ## 5. Browse the services
+- Get the Argo CD server URL:
+  - If using ingress: http://argo-cd.localtest.me
+- Deploy Homepage
 - Get the Homepage URL:
   - If using ingress: http://localtest.me
 

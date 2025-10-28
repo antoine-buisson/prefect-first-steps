@@ -13,6 +13,11 @@
 kubectl create secret generic -n polaris s3-polaris-credentials --from-literal=access_key_id=my_access_key_id --from-literal=secret_access_key=my_secret_access_key
 ```
 
+- Minio:
+  ```sh
+  kubectl create secret generic -n polaris s3-polaris-credentials --from-literal=access_key_id=minioadmin --from-literal=secret_access_key=minioadmin
+  ```
+
 ## Create catalog
 
 ```sh
@@ -39,11 +44,17 @@ curl -s \
       },
       "storageConfigInfo": {
         "storageType": "S3",
-        "endpoint": "http://garage.garage:3900",
-        "region": "garage",
-        "pathStyleAccess": true,
-        "stsUnavailable": true
+        "endpoint": "http://minio.minio:9000",
+        "region": "us-east-1",
+        "pathStyleAccess": true
       }
     }
   }'
+
+curl \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H 'Content-Type: application/json' \
+  -X PUT \
+  http://polaris.localtest.me/api/management/v1/catalogs/polaris-default/catalog-roles/catalog_admin/grants \
+  -d '{"type":"catalog", "privilege":"CATALOG_MANAGE_CONTENT"}'
 ```
