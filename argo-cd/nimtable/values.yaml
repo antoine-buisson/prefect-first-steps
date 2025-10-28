@@ -34,6 +34,7 @@ nimtable:
     port: 8182
   env:
     JAVA_OPTS: -Xmx32g -Xms512m
+    AWS_REGION: us-east-1
   config:
     server:
       port: 8182
