@@ -1,0 +1,16 @@
+[project]
+name = "flink-iceberg_datagen"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+requires-python = ">=3.11"
+package-mode = false
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+apache-flink = "2.1.0"

@@ -11,7 +11,7 @@ minikube tunnel
 ## 2. Deploy Argo CD
 ```sh
 cd terragrunt/argo-cd
-terragrunt apply
+terragrunt apply -auto-approve
 ```
 
 ## 3. Access Argo CD UI
@@ -26,7 +26,7 @@ kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data.pa
 *Make sure the Argo CD server URL is working*
 ```sh
 cd ../argo-cd-applicationset
-terragrunt apply
+terragrunt apply -auto-approve
 ```
 
 ## 5. Browse the services

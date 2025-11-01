@@ -1,3 +1,9 @@
+# poetry locks
+poetry.lock
+
+# Local jars
+*.jar
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
